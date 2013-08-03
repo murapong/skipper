@@ -4,7 +4,7 @@ using System.Collections;
 public class TitleController : MonoBehaviour {
 	
 	public	GUIStyle	BaseStyle;
-	public	string		nextSceneName	=	"miniMapScene";
+	public	string		nextSceneName	=	"Stage1";
 	private float		baseScreenSize	=	100.0f;
 
 	// Use this for initialization
