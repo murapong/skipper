@@ -10,10 +10,7 @@ public class MainCameraMove : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		player 							= GameObject.FindWithTag("Player");
-		Vector2	startPos				= new Vector2(player.transform.position.x,player.transform.position.y); 
-		Vector3 startPos_3				= new Vector3(startPos.x - width,startPos.y + height,gameObject.transform.position.z);
-		gameObject.transform.position	= startPos_3;
+		init();
 	}
 	
 	// Update is called once per frame
@@ -33,5 +30,15 @@ public class MainCameraMove : MonoBehaviour {
 	
 	void replay(){
 		liveFlag	=	true;
+		init();
 	}
+	
+	void init(){
+		player 							= GameObject.FindWithTag("Player");
+		Debug.Log("gamena"+player.name);
+		Vector2	startPos				= new Vector2(player.transform.position.x,player.transform.position.y); 
+		Vector3 startPos_3				= new Vector3(startPos.x - width,startPos.y + height,gameObject.transform.position.z);
+		gameObject.transform.position	= startPos_3;
+	}
+
 }

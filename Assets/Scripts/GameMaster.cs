@@ -11,7 +11,8 @@ public class GameMaster : MonoBehaviour {
 	public	float		playerDedSize	=	50.0f;
 	
 	private bool		cameraDedFalg	=	false;
-	private bool		playerDedFlag	=	false;	
+	private bool		playerDedFlag	=	false;
+	private bool		rePlayeFlag		=	false;
 	private Vector3		replayePos;
 	
 	private float		scoreTime		=	0.0f;		
@@ -26,22 +27,40 @@ public class GameMaster : MonoBehaviour {
 	public	float		timerSize		=	180.0f;
 	private float		baseScreenSize	=	100.0f;
 	
+	//Continu
+	public  GUIStyle	continueStyle;
+	public	GUIStyle	YesCG;
+	public	GUIStyle	NoCG;
+	private string		nowSceneName;
+	private	int			titleSceneName;
+	
+	private bool		clearFlag	=	false;
+	
 	// Use this for initialization
 	void Start () {
-		player 				= GameObject.FindWithTag("Player");
-		replayePos			= player.transform.position;
+		player 				= 	GameObject.FindWithTag("Player");
+		replayePos			= 	player.transform.position;
+		nowSceneName		= 	Application.loadedLevelName;
+		titleSceneName		= 	0;
+		timerSize			+=	Time.time;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(!playerDedFlag){
-			if(cameraDedFalg	== false){
-				cameraDeadLineCheck();
-			}else{
-				playerDeadLineCheck();
-			}
-			if(timerSize - Time.time < 0.0f){
-				playerDed();
+		if(clearFlag == false){
+			if(!playerDedFlag){
+				if(cameraDedFalg	== false){
+					cameraDeadLineCheck();
+				}else{
+					if(rePlayeFlag == false){
+						playerDeadLineCheck();
+					}else{
+						createPlayer();
+					}
+				}
+				if(timerSize - Time.time < 0.0f){
+					playerDed();
+				}
 			}
 		}
 	}
@@ -69,10 +88,15 @@ public class GameMaster : MonoBehaviour {
 	void replayInit(){
 		Destroy(player);
 		fallCount	+=	1;
-		Instantiate(playerPre,replayePos,playerPre.transform.rotation);
+		rePlayeFlag	=	true;
+	}
+	
+	void createPlayer(){
+		player	=	(GameObject)Instantiate(playerPre,replayePos,playerPre.transform.rotation);
 		GameObject.FindWithTag("miniCamera").SendMessage("replay");
 		GameObject.FindWithTag("MainCamera").SendMessage("replay");
 		cameraDedFalg	=	false;
+		rePlayeFlag 	= 	false;
 	}
 	
 	void sendCameraDed(){
@@ -84,17 +108,24 @@ public class GameMaster : MonoBehaviour {
 	
 	void playerDed(){
 		Debug.Log("playerDed");
+		Debug.Log("tim"+Time.time);
 		Destroy(player);
 		GameObject.FindWithTag("miniCamera").SendMessage("DeadChage");
 		GameObject.FindWithTag("MainCamera").SendMessage("DeadChage");
 		playerDedFlag	=	true;
 	}
 	
+	void getPos(Vector3	argPos){
+		replayePos	=	argPos;
+	}
+	
 	void OnGUI(){
-		if(playerDedFlag	== false){
-			timerView();
-		}else{
-			continueGUI();
+		if(clearFlag == false){
+			if(playerDedFlag	== false){
+				timerView();
+			}else{
+				continueGUI();
+			}
 		}
 	}
 	
@@ -107,6 +138,19 @@ public class GameMaster : MonoBehaviour {
 	}
 	
 	void continueGUI(){
-		
+		GUI.Button(new Rect(30.0f 	* (Screen.width /	baseScreenSize) ,20.0f 	* (Screen.height /	baseScreenSize),40.0f * (Screen.width /	baseScreenSize), 15.0f * (Screen.height /	baseScreenSize)), "",continueStyle);
+		if(GUI.Button(new Rect(27.5f	* (Screen.width /	baseScreenSize) ,60.0f 	* (Screen.height /	baseScreenSize),15.0f * (Screen.width /	baseScreenSize), 15.0f * (Screen.height /	baseScreenSize)), "",YesCG)){
+			Application.LoadLevel(nowSceneName);
+		}
+		if(GUI.Button(new Rect(55.0f	* (Screen.width /	baseScreenSize) ,60.0f 	* (Screen.height /	baseScreenSize),20.0f * (Screen.width /	baseScreenSize), 15.0f * (Screen.height /	baseScreenSize)), "",NoCG)){
+			Application.LoadLevel(titleSceneName);
+		}
+	}
+	
+	void clearChange(){
+		clearFlag	=	true;
+		GameObject.FindWithTag("goal").SendMessage("getTime",timerSize - Time.time);
+		scorePoint	=	10000 + (int)((timerSize - Time.time) * 100.0f) - fallCount * 100;
+		GameObject.FindWithTag("goal").SendMessage("getPoint",scorePoint);
 	}
 }

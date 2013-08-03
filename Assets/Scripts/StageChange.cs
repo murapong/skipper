@@ -16,7 +16,10 @@ public class StageChange : MonoBehaviour {
 	
 	private float		clearTime		=	0.0f;
 	private float		score			=	0.0f;
-	public	float		timerSize		=	180.0f;
+	private float		timerSize		=	0.0f;
+	
+	private float		nextSceneTime		= 	0.0f;
+	public	float		nextSceneAddTime	=	0.5f;
 	// Use this for initialization
 	void Start () {
 	
@@ -30,20 +33,23 @@ public class StageChange : MonoBehaviour {
 	}
 	
 	void nextScene(){
-		//Application.LoadLevel(nextStage);
+		if(Time.time > nextSceneTime){
+			if(Input.GetMouseButton(0)){
+				Application.LoadLevel(nextStage);
+			}
+		}
 	}
 	
 	void OnGUI(){
 		if(nextFlag){
-			float	timeS			=	timerSize		-	clearTime;
 			GUI.Button(new Rect(20.0f 		* (Screen.width /	baseScreenSize) , 5.0f 	* (Screen.height /	baseScreenSize),60.0f * (Screen.width /	baseScreenSize), 30.0f * (Screen.height /	baseScreenSize)),"",Clear_CG);
-			GUI.Button(new Rect(30.0f 		* (Screen.width /	baseScreenSize) , 40.0f 	* (Screen.height /	baseScreenSize),15.0f * (Screen.width /	baseScreenSize), 15.0f * (Screen.height /	baseScreenSize)),"",Point_CG);
-			GUI.Button(new Rect(30.0f 		* (Screen.width /	baseScreenSize) , 60.0f 	* (Screen.height /	baseScreenSize),15.0f * (Screen.width /	baseScreenSize), 15.0f * (Screen.height /	baseScreenSize)),"",Time_CG);
+			GUI.Button(new Rect(30.0f 		* (Screen.width /	baseScreenSize) , 40.0f 	* (Screen.height /	baseScreenSize),15.0f * (Screen.width /	baseScreenSize), 15.0f * (Screen.height /	baseScreenSize)),"",Time_CG);
+			GUI.Button(new Rect(30.0f 		* (Screen.width /	baseScreenSize) , 60.0f 	* (Screen.height /	baseScreenSize),15.0f * (Screen.width /	baseScreenSize), 15.0f * (Screen.height /	baseScreenSize)),"",Point_CG);
 			GUI.Button(new Rect(20.0f 		* (Screen.width /	baseScreenSize) , 80.0f 	* (Screen.height /	baseScreenSize),60.0f * (Screen.width /	baseScreenSize), 10.0f * (Screen.height /	baseScreenSize)),"",nextStage_CG);
 			
 			
 			font.fontSize		=	(int)(baseFontSize	*	(Screen.width /	baseScreenSize)); 
-			GUI.Button(new Rect(50.0f * (Screen.width /	baseScreenSize) ,40.0f 		* (Screen.height /	baseScreenSize),40.0f * (Screen.width /	baseScreenSize), 15.0f * (Screen.height /	baseScreenSize)), Mathf.Floor(timeS / 60f) + ":" + Mathf.Floor(timeS % 60f),font);
+			GUI.Button(new Rect(50.0f * (Screen.width /	baseScreenSize) ,40.0f 		* (Screen.height /	baseScreenSize),40.0f * (Screen.width /	baseScreenSize), 15.0f * (Screen.height /	baseScreenSize)), Mathf.Floor(timerSize / 60f) + ":" + Mathf.Floor(timerSize % 60f),font);
 			GUI.Button(new Rect(50.0f * (Screen.width /	baseScreenSize) ,60.0f 		* (Screen.height /	baseScreenSize),40.0f * (Screen.width /	baseScreenSize), 15.0f * (Screen.height /	baseScreenSize)), ""+score,font);
 		}
 		//	GUI.Button(new Rect(timerNamePos.x	* (Screen.width /	baseScreenSize) ,timerNamePos.y * (Screen.height /	baseScreenSize),timewideSize * (Screen.width /	baseScreenSize), timeheightSize * (Screen.height /	baseScreenSize)), "",timerNameStyle);
@@ -53,10 +59,20 @@ public class StageChange : MonoBehaviour {
 	}
 	
 	void OnCollisionEnter(Collision coinfor) {
-		Debug.Log("test");
 		if(coinfor.gameObject.tag	==	"Player"){
-			nextFlag	=	true;
-			clearTime	=	Time.time;
+			nextSceneTime	=	Time.time	+	nextSceneAddTime;
+			nextFlag		=	true;
+			GameObject.FindWithTag("miniCamera").SendMessage("clearChange");
+			GameObject.FindWithTag("GameMaseter").SendMessage("clearChange");
 		}
 	}
+	
+	void getTime(float argTime){
+		timerSize	=	argTime;
+	}
+	
+	void getPoint(int	argPoint){
+		score		=	argPoint;
+	}
 }
+
