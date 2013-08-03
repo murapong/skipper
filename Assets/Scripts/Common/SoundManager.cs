@@ -4,12 +4,24 @@ using System.Collections;
 public class SoundManager : MonoBehaviour
 {
     private static SoundManager instance;
+
+    #region AudioClip
+
     private AudioClip bgm;
     private AudioClip seYes;
     private AudioClip seNo;
+    private AudioClip seJump;
+
+    #endregion
+
+    #region AudioSource
+
     private AudioSource audioSourceBgm;
     private AudioSource audioSourceYes;
     private AudioSource audioSourceNo;
+    private AudioSource audioSourceJump;
+
+    #endregion
 
     public static SoundManager Instance
     {
@@ -30,10 +42,12 @@ public class SoundManager : MonoBehaviour
         this.bgm = Resources.Load("Sounds/bgm") as AudioClip;
         this.seYes = Resources.Load("Sounds/yes") as AudioClip;
         this.seNo = Resources.Load("Sounds/no") as AudioClip;
+        this.seJump = Resources.Load("Sounds/jump") as AudioClip;
 
         this.audioSourceBgm = this.gameObject.AddComponent<AudioSource>();
         this.audioSourceYes = this.gameObject.AddComponent<AudioSource>();
         this.audioSourceNo = this.gameObject.AddComponent<AudioSource>();
+        this.audioSourceJump = this.gameObject.AddComponent<AudioSource>();
 
         DontDestroyOnLoad(gameObject);
     }
@@ -67,5 +81,11 @@ public class SoundManager : MonoBehaviour
     {
         this.audioSourceNo.clip = this.seNo;
         this.audioSourceNo.Play();
+    }
+
+    public void PlayJumpSe()
+    {
+        this.audioSourceJump.clip = this.seJump;
+        this.audioSourceJump.Play();
     }
 }

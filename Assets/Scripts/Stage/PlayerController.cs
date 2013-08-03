@@ -61,6 +61,8 @@ public class PlayerController : MonoBehaviour
         this.rigidbody.AddForce(direction, ForceMode.Impulse);
 
         lineRenderer.enabled = false;
+
+        SoundManager.Instance.PlayJumpSe();
     }
 
     void DoubleJump()
