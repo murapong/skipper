@@ -68,6 +68,8 @@ public class PlayerController : MonoBehaviour
 
         soundManager.PlayJumpSe();
         soundManager.StopPullSe();
+
+        animationManager.PlayJumpUpAnimation();
     }
 
     void DoubleJump()
