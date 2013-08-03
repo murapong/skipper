@@ -26,6 +26,23 @@ public class SoundManager : MonoBehaviour
 
     #endregion
 
+    #region Volume
+
+    [RangeAttribute(0.0f, 1.0f)]
+    public float bgmTitleVolume;
+    [RangeAttribute(0.0f, 1.0f)]
+    public float bgmMainVolume;
+    [RangeAttribute(0.0f, 1.0f)]
+    public float seYesVolume;
+    [RangeAttribute(0.0f, 1.0f)]
+    public float seNoVolume;
+    [RangeAttribute(0.0f, 1.0f)]
+    public float seJumpVolume;
+    [RangeAttribute(0.0f, 1.0f)]
+    public float sePullVolume;
+
+    #endregion
+
     public static SoundManager Instance
     {
         get
@@ -75,6 +92,7 @@ public class SoundManager : MonoBehaviour
     {
         this.audioSourceBgm.clip = this.bgmTitle;
         this.audioSourceBgm.loop = true;
+        this.audioSourceBgm.volume = this.bgmTitleVolume;
         this.audioSourceBgm.Play();
     }
 
@@ -82,30 +100,35 @@ public class SoundManager : MonoBehaviour
     {
         this.audioSourceBgm.clip = this.bgmMain;
         this.audioSourceBgm.loop = true;
+        this.audioSourceBgm.volume = this.bgmMainVolume;
         this.audioSourceBgm.Play();
     }
 
     public void PlayYesSe()
     {
         this.audioSourceYes.clip = this.seYes;
+        this.audioSourceYes.volume = this.seYesVolume;
         this.audioSourceYes.Play();
     }
 
     public void PlayNoSe()
     {
         this.audioSourceNo.clip = this.seNo;
+        this.audioSourceNo.volume = this.seNoVolume;
         this.audioSourceNo.Play();
     }
 
     public void PlayJumpSe()
     {
         this.audioSourceJump.clip = this.seJump;
+        this.audioSourceJump.volume = this.seJumpVolume;
         this.audioSourceJump.Play();
     }
 
     public void PlayPullSe()
     {
         this.audioSourcePull.clip = this.sePull;
+        this.audioSourcePull.volume = this.sePullVolume;
         this.audioSourcePull.Play();
     }
 
