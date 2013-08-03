@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private bool isMoving;
     private bool isDoubleJumped;
     private SoundManager soundManager;
+    private PlayerAnimationManager animationManager;
 
     void Awake()
     {
@@ -20,6 +21,8 @@ public class PlayerController : MonoBehaviour
         lineRenderer = GetComponent<LineRenderer>();
 
         soundManager = SoundManager.Instance;
+
+        animationManager = GetComponent<PlayerAnimationManager>();
     }
 
     // Use this for initialization
@@ -39,6 +42,8 @@ public class PlayerController : MonoBehaviour
         startPosition = this.transform.position;
 
         soundManager.PlayPullSe();
+
+        animationManager.PlayChargingAnimation();
     }
 
     void OnMouseDrag()
