@@ -3,6 +3,12 @@ using System.Collections;
 
 public class StageController : MonoBehaviour
 {
+    private PlayerController playerController;
+
+    void Awake()
+    {
+        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+    }
 
     // Use this for initialization
     void Start()
@@ -13,6 +19,9 @@ public class StageController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetMouseButtonDown(0))
+        {
+            playerController.SendMessage("DoubleJump");
+        }
     }
 }

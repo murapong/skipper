@@ -1,12 +1,16 @@
 using UnityEngine;
 using System.Collections;
 
-public class PlayerDrag : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     [SerializeField]
     private float velocity;
+    [SerializeField]
+    private float doubleJumpVelocity;
     private Vector3 startPosition;
     private LineRenderer lineRenderer;
+    private bool isMoving;
+    private bool isDoubleJumped;
 
     void Awake()
     {
@@ -49,11 +53,33 @@ public class PlayerDrag : MonoBehaviour
 
     void OnMouseUp()
     {
+        isMoving = true;
+
         Vector3 direction = this.startPosition - this.transform.position;
         direction *= velocity;
         this.rigidbody.useGravity = true;
         this.rigidbody.AddForce(direction, ForceMode.Impulse);
 
         lineRenderer.enabled = false;
+    }
+
+    void DoubleJump()
+    {
+        if (this.isDoubleJumped)
+        {
+            return;
+        }
+
+        if (!this.isMoving)
+        {
+            return;
+        }
+
+        this.rigidbody.useGravity = true;
+        this.rigidbody.AddForce(Vector3.up * doubleJumpVelocity, ForceMode.Impulse);
+
+        lineRenderer.enabled = false;
+
+        this.isDoubleJumped = true;
     }
 }

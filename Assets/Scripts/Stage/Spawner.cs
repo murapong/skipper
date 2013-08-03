@@ -24,25 +24,6 @@ public class Spawner : MonoBehaviour
 
     void CreatePlayer()
     {
-        player = Instantiate(Resources.Load("Prefabs/Player"), this.transform.position, Quaternion.identity) as GameObject;
+        player = Instantiate(Resources.Load("Prefabs/Stage/Player"), this.transform.position, Quaternion.identity) as GameObject;
     }
 }
-
-//private var remainCheck : PlayerRemainCheck;
-//
-//function Start () {
-// CreatePlayer();
-// remainCheck = GetComponent(PlayerRemainCheck);
-//}
-
-
-//function Update() {
-// if ( !nowPlayer ) {
-//     if ( remainCheck.lastPlayerNum > 0 ) {
-//         remainCheck.lastPlayerNum--;
-//         CreatePlayer();
-//     } else {
-//         SendMessage("SetDisp");
-//     }
-// }
-//}
