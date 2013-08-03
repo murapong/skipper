@@ -12,13 +12,18 @@ public class PlayerAnimationManager : MonoBehaviour
     private SsAnimation idlingAnimation;
     [SerializeField]
     private SsAnimation chargingAnimation;
+    [SerializeField]
+    private SsAnimation chargeEndAnimation;
 
     #endregion
 
     // loop count (0 is loop)
     [SerializeField]
-    public int idlingPlayCount;
-    public int chargingCount;
+    private int idlingPlayCount;
+    [SerializeField]
+    private int chargingCount;
+    [SerializeField]
+    private int chargeEndCount;
 
     void Awake()
     {
@@ -49,6 +54,14 @@ public class PlayerAnimationManager : MonoBehaviour
     {
         spriteScript.Animation = this.chargingAnimation;
         spriteScript.PlayCount = this.chargingCount;
+        spriteScript.AnimationFinished = PlayChargeEndAnimation;
+        spriteScript.Play();
+    }
+
+    public void PlayChargeEndAnimation(SsSprite sprite)
+    {
+        spriteScript.Animation = this.chargeEndAnimation;
+        spriteScript.PlayCount = this.chargeEndCount;
         spriteScript.AnimationFinished = null;
         spriteScript.Play();
     }
