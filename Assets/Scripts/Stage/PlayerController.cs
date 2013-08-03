@@ -43,17 +43,10 @@ public class PlayerController : MonoBehaviour
 
     void OnMouseDrag()
     {
-        RaycastHit hit;
-
-        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
-        {
-            transform.position = new Vector3(hit.point.x, hit.point.y, 0.0f);
-        }
-
         this.rigidbody.useGravity = false;
 
         lineRenderer.enabled = true;
-        lineRenderer.SetPosition(0, this.transform.position);
+        lineRenderer.SetPosition(0, Camera.main.ScreenToWorldPoint(Input.mousePosition));
         lineRenderer.SetPosition(1, startPosition);
     }
 
@@ -61,7 +54,7 @@ public class PlayerController : MonoBehaviour
     {
         isMoving = true;
 
-        Vector3 direction = this.startPosition - this.transform.position;
+        Vector3 direction = this.startPosition - Camera.main.ScreenToWorldPoint(Input.mousePosition);
         direction *= velocity;
         this.rigidbody.useGravity = true;
         this.rigidbody.AddForce(direction, ForceMode.Impulse);
