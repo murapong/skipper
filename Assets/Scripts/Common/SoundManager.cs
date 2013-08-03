@@ -7,7 +7,8 @@ public class SoundManager : MonoBehaviour
 
     #region AudioClip
 
-    private AudioClip bgm;
+    private AudioClip bgmTitle;
+    private AudioClip bgmMain;
     private AudioClip seYes;
     private AudioClip seNo;
     private AudioClip seJump;
@@ -41,7 +42,9 @@ public class SoundManager : MonoBehaviour
 
     void Awake()
     {
-        this.bgm = Resources.Load("Sounds/bgm") as AudioClip;
+        // TODO: 不要なBGMを削除
+        this.bgmTitle = Resources.Load("Sounds/bgm_opening") as AudioClip;
+        this.bgmMain = Resources.Load("Sounds/bgm_main") as AudioClip;
         this.seYes = Resources.Load("Sounds/yes") as AudioClip;
         this.seNo = Resources.Load("Sounds/no") as AudioClip;
         this.seJump = Resources.Load("Sounds/jump") as AudioClip;
@@ -68,9 +71,16 @@ public class SoundManager : MonoBehaviour
 
     }
 
-    public void PlayBgm()
+    public void PlayTitleBgm()
     {
-        this.audioSourceBgm.clip = this.bgm;
+        this.audioSourceBgm.clip = this.bgmTitle;
+        this.audioSourceBgm.loop = true;
+        this.audioSourceBgm.Play();
+    }
+
+    public void PlayMainBgm()
+    {
+        this.audioSourceBgm.clip = this.bgmMain;
         this.audioSourceBgm.loop = true;
         this.audioSourceBgm.Play();
     }

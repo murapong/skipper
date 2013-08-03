@@ -8,6 +8,8 @@ public class StageController : MonoBehaviour
     void Awake()
     {
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+
+        SoundManager.Instance.PlayMainBgm();
     }
 
     // Use this for initialization
