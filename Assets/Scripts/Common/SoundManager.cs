@@ -11,6 +11,7 @@ public class SoundManager : MonoBehaviour
     private AudioClip seYes;
     private AudioClip seNo;
     private AudioClip seJump;
+    private AudioClip sePull;
 
     #endregion
 
@@ -20,6 +21,7 @@ public class SoundManager : MonoBehaviour
     private AudioSource audioSourceYes;
     private AudioSource audioSourceNo;
     private AudioSource audioSourceJump;
+    private AudioSource audioSourcePull;
 
     #endregion
 
@@ -43,11 +45,13 @@ public class SoundManager : MonoBehaviour
         this.seYes = Resources.Load("Sounds/yes") as AudioClip;
         this.seNo = Resources.Load("Sounds/no") as AudioClip;
         this.seJump = Resources.Load("Sounds/jump") as AudioClip;
+        this.sePull = Resources.Load("Sounds/pull") as AudioClip;
 
         this.audioSourceBgm = this.gameObject.AddComponent<AudioSource>();
         this.audioSourceYes = this.gameObject.AddComponent<AudioSource>();
         this.audioSourceNo = this.gameObject.AddComponent<AudioSource>();
         this.audioSourceJump = this.gameObject.AddComponent<AudioSource>();
+        this.audioSourcePull = this.gameObject.AddComponent<AudioSource>();
 
         DontDestroyOnLoad(gameObject);
     }
@@ -87,5 +91,16 @@ public class SoundManager : MonoBehaviour
     {
         this.audioSourceJump.clip = this.seJump;
         this.audioSourceJump.Play();
+    }
+
+    public void PlayPullSe()
+    {
+        this.audioSourcePull.clip = this.sePull;
+        this.audioSourcePull.Play();
+    }
+
+    public void StopPullSe()
+    {
+        this.audioSourcePull.Stop();
     }
 }

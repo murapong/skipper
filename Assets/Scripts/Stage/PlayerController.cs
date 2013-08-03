@@ -11,11 +11,15 @@ public class PlayerController : MonoBehaviour
     private LineRenderer lineRenderer;
     private bool isMoving;
     private bool isDoubleJumped;
+    private SoundManager soundManager;
 
     void Awake()
     {
         startPosition = this.transform.position;
+
         lineRenderer = GetComponent<LineRenderer>();
+
+        soundManager = SoundManager.Instance;
     }
 
     // Use this for initialization
@@ -33,6 +37,8 @@ public class PlayerController : MonoBehaviour
     void OnMouseDown()
     {
         startPosition = this.transform.position;
+
+        soundManager.PlayPullSe();
     }
 
     void OnMouseDrag()
@@ -62,7 +68,8 @@ public class PlayerController : MonoBehaviour
 
         lineRenderer.enabled = false;
 
-        SoundManager.Instance.PlayJumpSe();
+        soundManager.PlayJumpSe();
+        soundManager.StopPullSe();
     }
 
     void DoubleJump()
