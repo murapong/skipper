@@ -16,6 +16,12 @@ public class PlayerAnimationManager : MonoBehaviour
     private SsAnimation chargeEndAnimation;
     [SerializeField]
     private SsAnimation jumpUpAnimation;
+    [SerializeField]
+    private SsAnimation jumpUpEndAnimation;
+    [SerializeField]
+    private SsAnimation jumpDownAnimation;
+    [SerializeField]
+    private SsAnimation jumpDownEndAnimation;
 
     #endregion
 
@@ -28,6 +34,12 @@ public class PlayerAnimationManager : MonoBehaviour
     private int chargeEndCount;
     [SerializeField]
     private int jumpUpCount;
+    [SerializeField]
+    private int jumpUpEndCount;
+    [SerializeField]
+    private int jumpDownCount;
+    [SerializeField]
+    private int jumpDownEndCount;
 
     void Awake()
     {
@@ -74,6 +86,30 @@ public class PlayerAnimationManager : MonoBehaviour
     {
         spriteScript.Animation = this.jumpUpAnimation;
         spriteScript.PlayCount = this.jumpUpCount;
+        spriteScript.AnimationFinished = PlayJumpUpEndAnimation;
+        spriteScript.Play();
+    }
+
+    public void PlayJumpUpEndAnimation(SsSprite sprite)
+    {
+        spriteScript.Animation = this.jumpUpEndAnimation;
+        spriteScript.PlayCount = this.jumpUpEndCount;
+        spriteScript.AnimationFinished = null;
+        spriteScript.Play();
+    }
+
+    public void PlayJumpDownAnimation()
+    {
+        spriteScript.Animation = this.jumpDownAnimation;
+        spriteScript.PlayCount = this.jumpDownCount;
+        spriteScript.AnimationFinished = PlayJumpDownEndAnimation;
+        spriteScript.Play();
+    }
+
+    public void PlayJumpDownEndAnimation(SsSprite sprite)
+    {
+        spriteScript.Animation = this.jumpDownEndAnimation;
+        spriteScript.PlayCount = this.jumpDownEndCount;
         spriteScript.AnimationFinished = null;
         spriteScript.Play();
     }

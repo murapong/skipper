@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private bool isDoubleJumped;
     private SoundManager soundManager;
     private PlayerAnimationManager animationManager;
+    private bool isUp;
 
     void Awake()
     {
@@ -34,7 +35,22 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (gameObject.rigidbody.velocity.y > 2.0f && !isUp)
+        {
+            isUp = true;
+            animationManager.PlayJumpUpAnimation();
+        }
 
+        if (gameObject.rigidbody.velocity.y < -2.0f && isUp)
+        {
+            isUp = false;
+            animationManager.PlayJumpDownAnimation();
+        }
+
+        if (Mathf.Abs(gameObject.rigidbody.velocity.x) <= 0.5 && Mathf.Abs(gameObject.rigidbody.velocity.y) <= 0.0f)
+        {
+            animationManager.PlayIdlingAnimation();
+        }
     }
 
     void OnMouseDown()
@@ -68,8 +84,6 @@ public class PlayerController : MonoBehaviour
 
         soundManager.PlayJumpSe();
         soundManager.StopPullSe();
-
-        animationManager.PlayJumpUpAnimation();
     }
 
     void DoubleJump()
