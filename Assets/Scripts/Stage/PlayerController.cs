@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     private SoundManager soundManager;
     private PlayerAnimationManager animationManager;
     private bool isUp;
+    private GameMaster gameMaster;
 
     void Awake()
     {
@@ -24,6 +25,8 @@ public class PlayerController : MonoBehaviour
         soundManager = SoundManager.Instance;
 
         animationManager = GetComponent<PlayerAnimationManager>();
+
+        gameMaster = (GameMaster) GameObject.FindWithTag("GameMaster").GetComponent<GameMaster>();
     }
 
     // Use this for initialization
@@ -56,6 +59,9 @@ public class PlayerController : MonoBehaviour
     void OnMouseDown()
     {
         startPosition = this.transform.position;
+
+        // ゲームマスターに通知
+        gameMaster.SendMessage("getPos", Camera.main.ScreenToWorldPoint(startPosition));
 
         soundManager.PlayPullSe();
 
