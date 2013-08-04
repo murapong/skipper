@@ -62,7 +62,7 @@ public class SoundManager : MonoBehaviour
         // TODO: 不要なBGMを削除
         this.bgmTitle = Resources.Load("Sounds/bgm_opening") as AudioClip;
         this.bgmMain = Resources.Load("Sounds/bgm_main") as AudioClip;
-        this.seYes = Resources.Load("Sounds/yes") as AudioClip;
+        this.seYes = Resources.Load("Sounds/jump") as AudioClip;    // ジャンプ音と共通のものを使用
         this.seNo = Resources.Load("Sounds/no") as AudioClip;
         this.seJump = Resources.Load("Sounds/jump") as AudioClip;
         this.sePull = Resources.Load("Sounds/pull") as AudioClip;
