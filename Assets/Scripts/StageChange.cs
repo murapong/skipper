@@ -42,7 +42,7 @@ public class StageChange : MonoBehaviour {
 	
 	void OnGUI(){
 		if(nextFlag){
-			GUI.Button(new Rect(20.0f 		* (Screen.width /	baseScreenSize) , 5.0f 	* (Screen.height /	baseScreenSize),60.0f * (Screen.width /	baseScreenSize), 30.0f * (Screen.height /	baseScreenSize)),"",Clear_CG);
+			GUI.Button(new Rect(22.5f 		* (Screen.width /	baseScreenSize) , 5.0f 	* (Screen.height /	baseScreenSize),60.0f * (Screen.width /	baseScreenSize), 30.0f * (Screen.height /	baseScreenSize)),"",Clear_CG);
 			GUI.Button(new Rect(30.0f 		* (Screen.width /	baseScreenSize) , 40.0f 	* (Screen.height /	baseScreenSize),15.0f * (Screen.width /	baseScreenSize), 15.0f * (Screen.height /	baseScreenSize)),"",Time_CG);
 			GUI.Button(new Rect(30.0f 		* (Screen.width /	baseScreenSize) , 60.0f 	* (Screen.height /	baseScreenSize),15.0f * (Screen.width /	baseScreenSize), 15.0f * (Screen.height /	baseScreenSize)),"",Point_CG);
 			GUI.Button(new Rect(20.0f 		* (Screen.width /	baseScreenSize) , 80.0f 	* (Screen.height /	baseScreenSize),60.0f * (Screen.width /	baseScreenSize), 10.0f * (Screen.height /	baseScreenSize)),"",nextStage_CG);
