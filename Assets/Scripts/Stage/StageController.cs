@@ -7,8 +7,6 @@ public class StageController : MonoBehaviour
 
     void Awake()
     {
-        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-
         SoundManager.Instance.PlayMainBgm();
     }
 
@@ -23,7 +21,7 @@ public class StageController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            playerController.SendMessage("DoubleJump");
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().SendMessage("DoubleJump");
         }
     }
 }

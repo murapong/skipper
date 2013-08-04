@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     private SoundManager soundManager;
     private PlayerAnimationManager animationManager;
     private bool isUp;
+    private bool isCharging;
     private GameMaster gameMaster;
 
     void Awake()
@@ -38,12 +39,15 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Mathf.Abs(gameObject.rigidbody.velocity.x) == 0.0f && Mathf.Abs(gameObject.rigidbody.velocity.y) <= 0.0f)
+        if (gameObject.rigidbody.velocity.x == 0.0f && gameObject.rigidbody.velocity.y <= 0.0f)
         {
             isMoving = false;
             isDoubleJumped = false;
 
-            animationManager.PlayIdlingAnimation();
+            if (!isCharging)
+            {
+                animationManager.PlayIdlingAnimation();
+            }
         }
         else
         {
@@ -71,6 +75,7 @@ public class PlayerController : MonoBehaviour
         }
 
         startPosition = this.transform.position;
+        isCharging = true;
 
         // ゲームマスターに通知
         gameMaster.SendMessage("getPos", startPosition);
@@ -100,8 +105,9 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-        
+
         isMoving = true;
+        isCharging = false;
 
         Vector3 direction = this.startPosition - Camera.main.ScreenToWorldPoint(Input.mousePosition);
         direction *= velocity;
