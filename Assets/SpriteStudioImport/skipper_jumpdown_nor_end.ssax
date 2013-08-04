@@ -135,17 +135,17 @@
 			<Attributes>
 				<Attribute Tag="POSX" Inherit="100">
 					<Key Time="0" CurveType="1">
-						<Value>17</Value>
+						<Value>45</Value>
 					</Key>
 				</Attribute>
 				<Attribute Tag="POSY" Inherit="100">
 					<Key Time="0" CurveType="1">
-						<Value>-57</Value>
+						<Value>-28</Value>
 					</Key>
 				</Attribute>
 				<Attribute Tag="ANGL" Inherit="100">
 					<Key Time="0" CurveType="1">
-						<Value>0.000</Value>
+						<Value>-30.644</Value>
 					</Key>
 				</Attribute>
 				<Attribute Tag="SCAX" Inherit="100">
@@ -425,17 +425,17 @@
 			<Attributes>
 				<Attribute Tag="POSX" Inherit="100">
 					<Key Time="0" CurveType="1">
-						<Value>-1</Value>
+						<Value>0</Value>
 					</Key>
 				</Attribute>
 				<Attribute Tag="POSY" Inherit="100">
 					<Key Time="0" CurveType="1">
-						<Value>50</Value>
+						<Value>30</Value>
 					</Key>
 				</Attribute>
 				<Attribute Tag="ANGL" Inherit="100">
 					<Key Time="0" CurveType="1">
-						<Value>-17.780</Value>
+						<Value>-22.465</Value>
 					</Key>
 				</Attribute>
 				<Attribute Tag="SCAX" Inherit="100">
@@ -543,17 +543,17 @@
 			<Attributes>
 				<Attribute Tag="POSX" Inherit="100">
 					<Key Time="0" CurveType="1">
-						<Value>42</Value>
+						<Value>46</Value>
 					</Key>
 				</Attribute>
 				<Attribute Tag="POSY" Inherit="100">
 					<Key Time="0" CurveType="1">
-						<Value>99</Value>
+						<Value>102</Value>
 					</Key>
 				</Attribute>
 				<Attribute Tag="ANGL" Inherit="100">
 					<Key Time="0" CurveType="1">
-						<Value>14.260</Value>
+						<Value>-0.982</Value>
 					</Key>
 				</Attribute>
 				<Attribute Tag="SCAX" Inherit="100">
@@ -602,17 +602,17 @@
 			<Attributes>
 				<Attribute Tag="POSX" Inherit="100">
 					<Key Time="0" CurveType="1">
-						<Value>32</Value>
+						<Value>41</Value>
 					</Key>
 				</Attribute>
 				<Attribute Tag="POSY" Inherit="100">
 					<Key Time="0" CurveType="1">
-						<Value>122</Value>
+						<Value>81</Value>
 					</Key>
 				</Attribute>
 				<Attribute Tag="ANGL" Inherit="100">
 					<Key Time="0" CurveType="1">
-						<Value>17.730</Value>
+						<Value>29.616</Value>
 					</Key>
 				</Attribute>
 				<Attribute Tag="SCAX" Inherit="100">
@@ -710,7 +710,7 @@
 			<Attributes>
 				<Attribute Tag="POSX" Inherit="100">
 					<Key Time="0" CurveType="1">
-						<Value>43</Value>
+						<Value>87</Value>
 					</Key>
 				</Attribute>
 				<Attribute Tag="POSY" Inherit="100">
@@ -720,7 +720,7 @@
 				</Attribute>
 				<Attribute Tag="ANGL" Inherit="100">
 					<Key Time="0" CurveType="1">
-						<Value>5.180</Value>
+						<Value>-59.005</Value>
 					</Key>
 				</Attribute>
 				<Attribute Tag="SCAX" Inherit="100">

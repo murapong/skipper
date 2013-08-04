@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
         if (Mathf.Abs(gameObject.rigidbody.velocity.x) == 0.0f && Mathf.Abs(gameObject.rigidbody.velocity.y) <= 0.0f)
         {
             isMoving = false;
+            isDoubleJumped = false;
 
             animationManager.PlayIdlingAnimation();
         }
@@ -72,7 +73,7 @@ public class PlayerController : MonoBehaviour
         startPosition = this.transform.position;
 
         // ゲームマスターに通知
-        gameMaster.SendMessage("getPos", Camera.main.ScreenToWorldPoint(startPosition));
+        gameMaster.SendMessage("getPos", startPosition);
 
         soundManager.PlayPullSe();
 
