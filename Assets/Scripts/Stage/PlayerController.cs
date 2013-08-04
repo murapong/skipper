@@ -38,6 +38,17 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Mathf.Abs(gameObject.rigidbody.velocity.x) == 0.0f && Mathf.Abs(gameObject.rigidbody.velocity.y) <= 0.0f)
+        {
+            isMoving = false;
+
+            animationManager.PlayIdlingAnimation();
+        }
+        else
+        {
+            isMoving = true;
+        }
+
         if (gameObject.rigidbody.velocity.y > 2.0f && !isUp)
         {
             isUp = true;
@@ -49,15 +60,15 @@ public class PlayerController : MonoBehaviour
             isUp = false;
             animationManager.PlayJumpDownAnimation();
         }
-
-        if (Mathf.Abs(gameObject.rigidbody.velocity.x) <= 0.5 && Mathf.Abs(gameObject.rigidbody.velocity.y) <= 0.0f)
-        {
-            animationManager.PlayIdlingAnimation();
-        }
     }
 
     void OnMouseDown()
     {
+        if (isMoving)
+        {
+            return;
+        }
+
         startPosition = this.transform.position;
 
         // ゲームマスターに通知
@@ -70,6 +81,11 @@ public class PlayerController : MonoBehaviour
 
     void OnMouseDrag()
     {
+        if (isMoving)
+        {
+            return;
+        }
+
         this.rigidbody.useGravity = false;
 
         lineRenderer.enabled = true;
@@ -79,6 +95,11 @@ public class PlayerController : MonoBehaviour
 
     void OnMouseUp()
     {
+        if (isMoving)
+        {
+            return;
+        }
+        
         isMoving = true;
 
         Vector3 direction = this.startPosition - Camera.main.ScreenToWorldPoint(Input.mousePosition);
