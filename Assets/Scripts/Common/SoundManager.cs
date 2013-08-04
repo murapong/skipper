@@ -9,10 +9,12 @@ public class SoundManager : MonoBehaviour
 
     private AudioClip bgmTitle;
     private AudioClip bgmMain;
-    private AudioClip seYes;
+	private AudioClip seYes;
     private AudioClip seNo;
     private AudioClip seJump;
     private AudioClip sePull;
+	private AudioClip seClear;
+
 
     #endregion
 
@@ -23,6 +25,7 @@ public class SoundManager : MonoBehaviour
     private AudioSource audioSourceNo;
     private AudioSource audioSourceJump;
     private AudioSource audioSourcePull;
+	private AudioSource	audioSourceClear;
 
     #endregion
 
@@ -40,6 +43,8 @@ public class SoundManager : MonoBehaviour
     public float seJumpVolume;
     [RangeAttribute(0.0f, 1.0f)]
     public float sePullVolume;
+	[RangeAttribute(0.0f, 1.0f)]
+    public float seClearVolume;
 
     #endregion
 
@@ -60,19 +65,22 @@ public class SoundManager : MonoBehaviour
     void Awake()
     {
         // TODO: 不要なBGMを削除
-        this.bgmTitle = Resources.Load("Sounds/bgm_opening") as AudioClip;
-        this.bgmMain = Resources.Load("Sounds/bgm_main") as AudioClip;
-        this.seYes = Resources.Load("Sounds/yes") as AudioClip;
-        this.seNo = Resources.Load("Sounds/no") as AudioClip;
-        this.seJump = Resources.Load("Sounds/jump") as AudioClip;
-        this.sePull = Resources.Load("Sounds/pull") as AudioClip;
+        this.bgmTitle	= Resources.Load("Sounds/bgm_opening") as AudioClip;
+        this.bgmMain	= Resources.Load("Sounds/bgm_main") as AudioClip;
+        this.seClear	= Resources.Load("Sounds/Clear") as AudioClip;
+		this.seYes 		= Resources.Load("Sounds/yes") as AudioClip;
+        this.seNo 		= Resources.Load("Sounds/no") as AudioClip;
+        this.seJump		= Resources.Load("Sounds/jump") as AudioClip;
+        this.sePull 	= Resources.Load("Sounds/pull") as AudioClip;
+		
 
-        this.audioSourceBgm = this.gameObject.AddComponent<AudioSource>();
-        this.audioSourceYes = this.gameObject.AddComponent<AudioSource>();
-        this.audioSourceNo = this.gameObject.AddComponent<AudioSource>();
-        this.audioSourceJump = this.gameObject.AddComponent<AudioSource>();
-        this.audioSourcePull = this.gameObject.AddComponent<AudioSource>();
-
+        this.audioSourceBgm 	= this.gameObject.AddComponent<AudioSource>();
+        this.audioSourceYes 	= this.gameObject.AddComponent<AudioSource>();
+        this.audioSourceNo 		= this.gameObject.AddComponent<AudioSource>();
+        this.audioSourceJump 	= this.gameObject.AddComponent<AudioSource>();
+        this.audioSourcePull 	= this.gameObject.AddComponent<AudioSource>();
+		this.audioSourceClear	= this.gameObject.AddComponent<AudioSource>();
+		
         DontDestroyOnLoad(gameObject);
     }
 
@@ -131,9 +139,20 @@ public class SoundManager : MonoBehaviour
         this.audioSourcePull.volume = this.sePullVolume;
         this.audioSourcePull.Play();
     }
+	
+	 public void PlayClearSe()
+    {
+        this.audioSourceClear.clip 		= this.seClear;
+        this.audioSourceClear.volume 	= this.seClearVolume;
+        this.audioSourceClear.Play();
+    }
 
     public void StopPullSe()
     {
         this.audioSourcePull.Stop();
     }
+	
+	public void StopTitleBgm(){
+		 this.audioSourceBgm.Stop();
+	}
 }
