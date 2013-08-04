@@ -63,7 +63,7 @@ public class StageChange : MonoBehaviour {
 			nextSceneTime	=	Time.time	+	nextSceneAddTime;
 			nextFlag		=	true;
 			GameObject.FindWithTag("miniCamera").SendMessage("clearChange");
-			GameObject.FindWithTag("GameMaseter").SendMessage("clearChange");
+			GameObject.FindWithTag("GameMaster").SendMessage("clearChange");
 		}
 	}
 	
