@@ -116,6 +116,7 @@ public class GameMaster : MonoBehaviour {
 	}
 	
 	void getPos(Vector3	argPos){
+		Debug.Log("teste"+argPos);
 		replayePos	=	argPos;
 	}
 	
@@ -149,7 +150,7 @@ public class GameMaster : MonoBehaviour {
 	
 	void clearChange(){
 		clearFlag	=	true;
-		GameObject.FindWithTag("goal").SendMessage("getTime",timerSize - Time.time);
+		GameObject.FindWithTag("goal").SendMessage("getTime",(timerSize - Time.time));
 		scorePoint	=	10000 + (int)((timerSize - Time.time) * 100.0f) - fallCount * 100;
 		GameObject.FindWithTag("goal").SendMessage("getPoint",scorePoint);
 	}
